@@ -1,0 +1,205 @@
+{
+	"info": {
+		"_postman_id": "95f62ae7-6dc9-4201-89f2-4d11134ed72f",
+		"name": "Music Gear",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28972171"
+	},
+	"item": [
+		{
+			"name": "GET all gear items",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/musicgear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"musicgear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET gear item by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/musicgear/12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"musicgear",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE gear item by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/musicgear/12",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"musicgear",
+						"12"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET gear item by type",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/musicgear?type=Synthesizer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"musicgear"
+					],
+					"query": [
+						{
+							"key": "type",
+							"value": "Synthesizer"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET gear item by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9000/musicgear?name=Arturia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"musicgear"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Arturia"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ADD gear item",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"NEWER GEAR ITEM\",\n    \"name\": \"NEWER GEAR ITEM DESCRIPTION\",\n    \"description\": \"NEWER GEAR ITEM DESCRIPTION\",\n    \"is_vintage\": \"false\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/musicgear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"musicgear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update GearItem TYPE by Id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"gear_id\" : \"14\",\n    \"type\" : \"NEWER TYPE\",\n    \"name\" : \"NEWER GEAR ITEM NAME\",\n    \"description\" : \"NEWER GEAR ITEM DESCRIPTION\",\n    \"is_vintage\" : \"false\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/musicgear/14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"musicgear",
+						"14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update GearItem DESCRIPTION by Id Copy",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"gear_id\" : \"14\",\n    \"type\" : \"NEWER TYPE\",\n    \"name\" : \"NEWER GEAR ITEM NAME\",\n    \"description\" : \"NEWER GEAR ITEM DESCRIPTION\",\n    \"is_vintage\" : \"false\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9000/musicgear/14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9000",
+					"path": [
+						"musicgear",
+						"14"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
