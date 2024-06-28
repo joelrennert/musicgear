@@ -13,7 +13,9 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 
+
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/musicgear")
 public class GearItemController {
 
