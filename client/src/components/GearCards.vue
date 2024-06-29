@@ -84,7 +84,7 @@ li {
 }
 
 .name {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   color: black;
   font-family: 'Jura';
 }
