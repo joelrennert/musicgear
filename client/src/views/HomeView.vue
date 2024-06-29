@@ -15,7 +15,7 @@ import MusicGearService from '../services/MusicGearService'
         <div class="search">
           <NavItems />
           <div class="h4title">
-            <h4>PERSONAL MUSIC GEAR INFORMATION CENTER</h4>
+            <h4>MUSIC GEAR INFORMATION CENTER</h4>
           </div>
           <SearchBox @search="filterGearItems" />
         </div>
@@ -67,7 +67,8 @@ export default {
         this.filteredGearArray = this.gearArray.filter(
           (item) =>
             item.name.toLowerCase().includes(this.filter) ||
-            item.type.toLowerCase().includes(this.filter)
+            item.type.toLowerCase().includes(this.filter) ||
+            item.description.toLowerCase().includes(this.filter)
         )
       } else {
         this.filteredGearArray = this.gearArray
