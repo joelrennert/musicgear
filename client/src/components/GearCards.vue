@@ -44,6 +44,7 @@ body {
 
 ul {
   padding: 0px;
+  
 }
 
 li {
@@ -51,6 +52,7 @@ li {
   flex-wrap: wrap;
   list-style: none;
   /* font-size: 1.1rem; */
+  
 }
 
 .itemCard {
@@ -64,7 +66,7 @@ li {
   margin: 10px;
 
   /* squares up layout */
-  width: 22%;
+  width: 20%;
 
   color: rgb(0, 0, 0);
 
@@ -87,6 +89,9 @@ li {
   font-size: 1.4rem;
   color: black;
   font-family: 'Jura';
+  background-color: rgba(255, 255, 255, 0.23);
+  padding: 6px;
+  border-radius: 10px;
 }
 
 .name,

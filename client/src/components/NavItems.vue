@@ -5,20 +5,22 @@ import { RouterLink } from 'vue-router'
   <nav>
     <RouterLink to="/">Home</RouterLink>
     <RouterLink to="/about">About</RouterLink>
-    <RouterLink to="/about">Add Item</RouterLink>
+    <RouterLink to="/">Add Item</RouterLink>
   </nav>
 </template>
 <script>
 export default {}
 </script>
+
 <style scoped>
+
 nav {
   display: flex;
-  flex-grow: 1;
+  width: 34%;
   font-family: 'Jura';
   font-size: 1rem;
-  padding: 10px;
   text-align: center;
+  align-items: center;
 }
 
 nav a.router-link-exact-active {
@@ -37,5 +39,4 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
-
 </style>

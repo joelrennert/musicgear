@@ -11,13 +11,18 @@ import MusicGearService from '../services/MusicGearService'
     <header>
       <div class="wrapper">
         <HelloWorld msg="music gear" />
+
         <div class="search">
           <NavItems />
+          <div class="h4title">
+            <h4>PERSONAL MUSIC GEAR INFORMATION CENTER</h4>
+          </div>
           <SearchBox @search="filterGearItems" />
         </div>
       </div>
     </header>
-    <div class="container">
+
+    <div class="cardscontainer">
       <GearCards :gearArray="filteredGearArray" />
     </div>
   </main>
@@ -76,7 +81,25 @@ export default {
 </script>
 
 <style scoped>
-.container {
+.h4title {
+  display: flex;
+  font-family: 'Jura';
+  font-size: 1.4rem;
+  color: rgba(0, 0, 0, 0.489);
+  padding: 3px;
+  width: 100%;
+  flex-grow: 4;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.titleimage {
+  display: flex;
+  justify-content: space-evenly;
+  flex-grow: 1;
+  width: 80%;
+  /* padding: 5px; */
+}
+.cardscontainer {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -96,24 +119,7 @@ main {
   line-height: 1.5;
   flex-grow: 1;
 }
-nav {
-  display: flex;
-  flex-grow: 1;
-  text-align: center;
-}
-nav a.router-link-exact-active {
-  color: black;
-}
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-}
-nav a:first-of-type {
-  border: 0;
-}
+
 @media (min-width: 768px) {
   header {
     display: flex;
@@ -142,7 +148,7 @@ nav a:first-of-type {
       circle,
       rgba(241, 251, 229, 1) 10%,
       rgba(241, 251, 229, 0.675) 50%,
-      rgba(206, 245, 243, 0.669) 90%
+      rgba(203, 223, 222, 0.669) 90%
     );
   }
   .navsearchcontainer {
@@ -161,11 +167,7 @@ nav a:first-of-type {
     justify-content: flex-start;
     flex-grow: 2;
   }
-  nav {
-    font-family: 'Jura';
-    font-size: 1rem;
-    padding: 10px;
-  }
+
   .search {
     display: flex;
     justify-content: space-between;

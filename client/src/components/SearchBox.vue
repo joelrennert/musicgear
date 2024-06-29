@@ -49,7 +49,7 @@ export default {
   border-color: black;
   border-radius: 6px;
   border-width: 0px;
-  padding: 5px;
+  padding: 3px;
 }
 .searchbutton {
   font-family: 'Jura';
@@ -59,6 +59,6 @@ export default {
   color: white;
   border-width: 0;
   border-radius: 6px;
-  padding: 7px;
+  padding: 3px;
 }
 </style>
