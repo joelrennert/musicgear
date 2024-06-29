@@ -20,7 +20,7 @@ export default {}
 footer {
   display: flex;
   align-items: center;
-  width: 99vw;
+  width: 100vw;
   height: 20px;
   bottom: 0;
   left: 0;
