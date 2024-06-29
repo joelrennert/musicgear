@@ -22,9 +22,8 @@
 }
   footer {
     display: flex;
-  
     align-items: center;
-    width: 100%;
+    width: 99vw;
     height: 20px;
     bottom: 0;
     left: 0;
