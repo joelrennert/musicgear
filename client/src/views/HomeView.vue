@@ -114,7 +114,7 @@ nav a {
 nav a:first-of-type {
   border: 0;
 }
-@media (min-width: 1024px) {
+@media (min-width: 768px) {
   header {
     display: flex;
     justify-content: center;
@@ -189,89 +189,3 @@ nav a:first-of-type {
   }
 }
 </style>
-<!-- <script setup></script>
-
-<template>
-  <main>
-    <div class="container">
-      <GearCards v-bind:gearArray="gearArray" />
-      
-    </div>
-  </main>
-</template>
-
-<script>
-import GearCards from '../components/GearCards.vue'
-import MusicGearService from '../services/MusicGearService'
-
-export default {
-  components: {
-    GearCards
-  },
-  data() {
-    return {
-      gearArray: [],
-      filter: ""
-    }
-  },
-
-  methods: {
-    getGearItems() {
-      MusicGearService.list()
-        .then((response) => {
-          this.gearArray = response.data
-          this.isLoading = false
-          console.log(this.gearArray)
-        })
-        .catch((error) => {
-          this.handleError(error)
-        })
-    },
-    handleError(error) {
-      this.isLoading = false
-      console.log(error)
-      //
-    }
-  },
-
-  searchGearItems() {
-    this.isLoading = true;
-
-    if (this.filter) {
-      MusicGearService
-      .searchGearItems(this.filter)
-      .then((response) => {
-        this.gearArray = response.data;
-      })
-      .catch((error) => {
-        this.handleError(error);
-      })
-      .finally(() => {
-        this.isLoading = false;
-      });
-    } else {
-      this.getGearItems();
-    }
-
-  },
-
-  created() {
-    this.getGearItems()
-  }
-}
-</script>
-
-<style scoped>
-.container {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  width: 100vw;
-  margin-top: 20px;
-  margin-bottom: 50px;
-}
-main {
-  display: flex;
-}
-</style> -->

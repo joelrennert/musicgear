@@ -77,7 +77,7 @@ img {
   color: rgb(0, 0, 0);
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 768) {
   .greetings h1,
   .greetings h3 {
 
