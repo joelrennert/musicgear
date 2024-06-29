@@ -65,8 +65,11 @@
 
 html {
   width: 100vw;
-  overflow-x: clip;
-  overflow-y:scroll;
+}
+
+::-webkit-scrollbar {
+  width: 0;  
+  background: transparent;
 }
 
 body {
