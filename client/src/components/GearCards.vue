@@ -6,7 +6,7 @@
       </div>
       <li class="image">
         <div class="image-container">
-          <img src="/src/assets/equaliser-svgrepo-com.svg" width="150px" height="150px" />
+          <img src="/src/assets/equaliser-svgrepo-com.svg" width="100px" height="100px" />
         </div>
       </li>
       <li>
@@ -50,21 +50,21 @@ li {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  font-size: 1.1rem;
+  /* font-size: 1.1rem; */
 }
 
 .itemCard {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-grow: 1;
+  /* flex-grow: 1; */
 
   border-radius: 6px;
-  padding: 10px;
-  margin: 15px;
+  padding: 5px;
+  margin: 10px;
 
-  /* UNCOMMENT BELOW TO SQUARE UP LAYOUT :) */
-  width: 30%;
+  /* squares up layout */
+  width: 22%;
 
   color: rgb(0, 0, 0);
 
@@ -84,7 +84,7 @@ li {
 }
 
 .name {
-  font-size: 1.6rem;
+  font-size: 1.3rem;
   color: black;
   font-family: 'Jura';
 }
@@ -97,9 +97,9 @@ li {
   display: flex;
   flex-direction: column;
   align-items: left;
-  justify-content: space-around;
+  justify-content: space-evenly;
   flex-wrap: wrap;
-  padding: 10px;
+  padding: 5px;
   font-weight: 400;
 }
 
@@ -115,7 +115,7 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 150px;
-  height: 150px;
+  width: 100px;
+  height: 100px;
 }
 </style>
