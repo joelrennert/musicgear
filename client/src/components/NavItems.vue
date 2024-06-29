@@ -5,7 +5,7 @@ import { RouterLink } from 'vue-router'
   <nav>
     <RouterLink to="/">Home</RouterLink>
     <RouterLink to="/about">About</RouterLink>
-    <RouterLink to="/">Add Item</RouterLink>
+    <RouterLink to="/">Add</RouterLink>
   </nav>
 </template>
 <script>
@@ -13,7 +13,6 @@ export default {}
 </script>
 
 <style scoped>
-
 nav {
   display: flex;
   width: 34%;
