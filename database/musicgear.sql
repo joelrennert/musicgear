@@ -18,19 +18,19 @@ CREATE TABLE gear (
 
 -- ***** INSERT DATA
 INSERT INTO gear(type, name, description, is_vintage) VALUES
-('Guitar', 'DIY Telecaster', 'Modded kit build, added humbucker in neck position', FALSE),
-('Guitar', 'Yamaha Acoustic', 'Nice guitar, needs strings', FALSE),
-('Guitar', 'Yamaha Classical', 'Nice classical guitar', FALSE),
-('Synthesizer', 'Novation MiniNova', 'Digital polysynth has seen better days', FALSE),
-('Synthesizer', 'Behringer Neutron', 'Analog Monosynth racked in eurorack cabinet', FALSE),
+('Guitar', 'DIY Telecaster', 'Modded kit build', FALSE),
+('Guitar', 'Yamaha Acoustic', 'Acoustic Guitar', FALSE),
+('Guitar', 'Yamaha Classical', 'Classical guitar', FALSE),
+('Synthesizer', 'Novation MiniNova', 'Digital polysynth', FALSE),
+('Synthesizer', 'Behringer Neutron', 'Analog Monosynth', FALSE),
 ('Synthesizer', 'Eurorack Modules', 'Lots to list here', FALSE),
-('Audio', 'Ampex Reel to Reel','Vintage late 1960’s reel to reel amplifier section', TRUE),
-('Audio', 'Technics SA-205', 'Vintage AM/FM stereo receiver', TRUE),
-('Audio', 'Tascam 424 mk1', 'Vintage 90s 4-track cassette recorder', TRUE),
-('Audio', 'Yamaha EQ-70', 'Vintage 90s Graphic EQ', TRUE),
+('Audio', 'Ampex Reel to Reel','1960s amp', TRUE),
+('Audio', 'Technics SA-205', '1970s receiver', TRUE),
+('Audio', 'Tascam 424 mk1', '1990s 4-track', TRUE),
+('Audio', 'Yamaha EQ-70', '1990s Graphic EQ', TRUE),
 ('Midi', 'Arturia KeyStep', 'Midi Controller', FALSE),
 ('Midi', 'Arturia BeatStep', 'Midi Controller', FALSE),
-('Mic', 'Astatic Harp Mic', '1950s harp/harmonica microphone', TRUE)
+('Mic', 'Astatic Harp Mic', '1950s harp mic', TRUE)
 
 
 -- ***** INSERT TEST DATA

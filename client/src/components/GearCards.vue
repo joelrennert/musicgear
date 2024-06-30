@@ -4,6 +4,10 @@
       <div class="name">
         <h4>{{ item.name }}</h4>
       </div>
+      <!-- <div class="tools">
+        <img src="/src/assets/wrench-svgrepo-com.svg" height="20" />
+        <img src="/src/assets/trashcan-svgrepo-com.svg" height="20" />
+      </div> -->
       <li class="image">
         <div class="image-container">
           <img src="/src/assets/equaliser-svgrepo-com.svg" width="100px" height="100px" />
@@ -18,6 +22,10 @@
       <li>
         <div class="isVintage">Vintage: {{ item.vintage ? 'Yes' : 'No' }}</div>
       </li>
+      <div class="tools">
+        <img src="/src/assets/wrench-svgrepo-com.svg" height="20" />
+        <img src="/src/assets/trashcan-svgrepo-com.svg" height="20" />
+      </div>
     </ul>
   </article>
 </template>
@@ -44,7 +52,6 @@ body {
 
 ul {
   padding: 0px;
-  
 }
 
 li {
@@ -52,7 +59,16 @@ li {
   flex-wrap: wrap;
   list-style: none;
   /* font-size: 1.1rem; */
-  
+}
+
+.tools {
+  display: flex;
+  justify-content: right;
+  align-items: baseline;
+  padding: 10px;
+  gap: 5px;
+  flex-grow: 1;
+  /* opacity: 0.25; */
 }
 
 .itemCard {
@@ -66,7 +82,7 @@ li {
   margin: 10px;
 
   /* squares up layout */
-  width: 20%;
+  width: 22%;
 
   color: rgb(0, 0, 0);
 
@@ -86,7 +102,7 @@ li {
 }
 
 .name {
-  font-size: 1.4rem;
+  font-size: 1rem;
   color: black;
   font-family: 'Jura';
   background-color: rgba(255, 255, 255, 0.23);
