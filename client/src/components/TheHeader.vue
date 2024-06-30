@@ -2,7 +2,6 @@
 import HelloWorld from '../components/HelloWorld.vue'
 import SearchBox from '../components/SearchBox.vue'
 import NavItems from '../components/NavItems.vue'
-import MusicGearService from '../services/MusicGearService'
 </script>
 
 <template>

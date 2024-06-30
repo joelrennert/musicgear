@@ -86,7 +86,7 @@ export default {
   display: flex;
   font-family: 'Jura';
   font-size: 1.4rem;
-  color: rgba(0, 0, 0, 0.489);
+  color: rgba(0, 0, 0, 0.638);
   padding: 3px;
   width: 100%;
   flex-grow: 4;
