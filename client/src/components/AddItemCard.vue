@@ -2,28 +2,27 @@
   <div class="itemCard">
     <h1 class="name">ADD GEAR ITEM</h1>
     <div class="aboutcontent">
-      <div class="add-gear-item">
-    <h2>Add New Gear Item</h2>
-    <form @submit.prevent="submitForm">
-      <div>
-        <label for="name">Name:</label>
-        <input type="text" v-model="gearItem.name" id="name" required />
-      </div>
-      <div>
-        <label for="type">Type:</label>
-        <input type="text" v-model="gearItem.type" id="type" required />
-      </div>
-      <div>
-        <label for="description">Description:</label>
-        <textarea v-model="gearItem.description" id="description" required></textarea>
-      </div>
-      <div>
-        <label for="isVintage">Is Vintage:</label>
-        <input type="checkbox" v-model="gearItem.isVintage" id="isVintage" />
-      </div>
-      <button type="submit">Add Gear Item</button>
-    </form>
-  </div>
+      <h3>Add A New Gear Item</h3>
+
+      <form @submit.prevent="submitForm" class="addContainer">
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" v-model="gearItem.name" id="name" required />
+        </div>
+        <div>
+          <label for="type">Type:</label>
+          <input type="text" v-model="gearItem.type" id="type" required />
+        </div>
+        <div>
+          <label for="description">Description:</label>
+          <textarea v-model="gearItem.description" id="description" required></textarea>
+        </div>
+        <div>
+          <label for="isVintage">Is Vintage:</label>
+          <input type="checkbox" v-model="gearItem.isVintage" id="isVintage" />
+        </div>
+        <button type="submit" class="submitButton">Add Gear Item</button>
+      </form>
     </div>
   </div>
 </template>
@@ -46,14 +45,14 @@ export default {
     submitForm() {
       this.isLoading = true
       MusicGearService.addNewGearItem(this.gearItem)
-        .then(response => {
+        .then((response) => {
           if (response.status === 201) {
             console.log('Gear item added successfully')
             this.$emit('gear-item-added', response.data)
             this.resetForm()
           }
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Error adding gear item:', error)
         })
         .finally(() => {
@@ -72,38 +71,44 @@ export default {
 }
 </script>
 <style scoped>
-.subtitle {
-  font-style: italic;
-}
-.postmanimg {
-  border-radius: 16px;
+h3 {
+  font-family: 'Jura';
 }
 
-.postman {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 20px;
+label {
+  font-family: 'Jura';
 }
 
-.features {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: left;
-  padding: 20px;
-  flex-grow: 1;
-  height: 100%;
+input,
+textarea {
+  font-family: 'Jura';
+  font-size: 1rem;
+  border-width: 1px;
+  border-color: black;
+  border-radius: 6px;
+  border-width: 0px;
+  padding: 6px;
 }
 
-.text {
+.addContainer {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  /* padding: 20px; */
-  line-height: 2;
+  gap: 10px;
+  width: 50%;
 }
+
+.submitButton {
+  font-family: 'Jura';
+  font-size: 1rem;
+  font-weight: 600;
+  background-color: rgb(46, 45, 45);
+  color: white;
+  border-width: 0;
+  border-radius: 6px;
+  padding: 4px;
+}
+
 .aboutcontent {
   display: flex;
   flex-direction: column;
