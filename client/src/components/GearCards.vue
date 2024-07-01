@@ -3,6 +3,7 @@
     <ul>
       <div class="name">
         <h4>{{ item.name }}</h4>
+        <!-- <h5>{{ item.gearId }}</h5> -->
       </div>
       <li class="image">
         <div class="image-container">
@@ -10,7 +11,7 @@
         </div>
       </li>
       <li>
-        <div class="type">{{ item.type }} {{ item.gearId }}</div>
+        <div class="type">{{ item.type }}</div>
       </li>
       <li>
         <div class="description">{{ item.description }}</div>
@@ -60,6 +61,9 @@ body {
   overflow: auto;
 }
 
+h5 {
+  font-style: italic;
+}
 ul {
   padding: 0px;
 }
@@ -104,6 +108,9 @@ li {
 }
 
 .name {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
   font-size: 1rem;
   color: black;
   font-family: 'Jura';
@@ -112,7 +119,7 @@ li {
   border-radius: 10px;
 }
 
-.name,
+/* .name, */
 .image,
 .type,
 .description,
