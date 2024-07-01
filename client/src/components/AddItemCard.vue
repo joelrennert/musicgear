@@ -57,6 +57,7 @@ export default {
         })
         .finally(() => {
           this.isLoading = false
+          this.$router.push("/");
         })
     },
     resetForm() {

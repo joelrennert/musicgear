@@ -20,10 +20,10 @@
         <div class="isVintage">Vintage: {{ item.vintage ? 'Yes' : 'No' }}</div>
       </li>
       <div class="tools">
-        <img src="/src/assets/wrench-svgrepo-com.svg" height="20" />
+        <img src="/src/assets/pencil-svgrepo-com.svg" class="update" height="20" />
         <img
           src="/src/assets/trashcan-svgrepo-com.svg"
-          v-on:click="deleteGearItemById(item.gearId)"
+          v-on:click="deleteGearItemById(item.gearId)" class="delete"
           height="20"
         />
       </div>
@@ -72,6 +72,10 @@ li {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
+}
+
+.delete, .update {
+  cursor: pointer;
 }
 
 .tools {

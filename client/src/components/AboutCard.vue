@@ -3,13 +3,13 @@
     <h1 class="name">MUSIC GEAR</h1>
     <div class="aboutcontent">
       <!-- <img src="/src/assets/piano-svgrepo-com.svg" width="200" /> -->
-          <img src="/src/assets/equaliser-svgrepo-com.svg" width="250px" />
-
       <p class="subtitle">BASIC PERSONAL MUSIC GEAR INFORMATION CENTER</p>
+      <img src="/src/assets/equaliser-svgrepo-com.svg" width="200px" />
+
       <div class="text">
         <p>This program is my attempt to demonstrate CRUD functionality in a full stack web app</p>
         <div class="postman">
-          <img src="/src/assets/postman.png" class="postmanimg" height="200" />
+          <img src="/src/assets/postman.png" class="postmanimg" height="270" />
           <div class="features">
             <p>Written by Joel Rennert</p>
             <p>-------------------</p>
@@ -62,7 +62,7 @@ export default {}
 .aboutcontent {
   display: flex;
   flex-direction: column;
-  padding: 40px;
+  padding: 20px;
   gap: 20px;
   justify-content: flex-start;
   align-items: center;
