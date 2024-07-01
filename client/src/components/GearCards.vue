@@ -4,17 +4,13 @@
       <div class="name">
         <h4>{{ item.name }}</h4>
       </div>
-      <!-- <div class="tools">
-        <img src="/src/assets/wrench-svgrepo-com.svg" height="20" />
-        <img src="/src/assets/trashcan-svgrepo-com.svg" height="20" />
-      </div> -->
       <li class="image">
         <div class="image-container">
           <img src="/src/assets/equaliser-svgrepo-com.svg" width="100px" height="100px" />
         </div>
       </li>
       <li>
-        <div class="type">{{ item.type }}</div>
+        <div class="type">{{ item.type }} {{ item.gearId }}</div>
       </li>
       <li>
         <div class="description">{{ item.description }}</div>
@@ -24,26 +20,40 @@
       </li>
       <div class="tools">
         <img src="/src/assets/wrench-svgrepo-com.svg" height="20" />
-        <img src="/src/assets/trashcan-svgrepo-com.svg" height="20" />
+        <img
+          src="/src/assets/trashcan-svgrepo-com.svg"
+          v-on:click="deleteGearItemById(item.gearId)"
+          height="20"
+        />
       </div>
     </ul>
   </article>
 </template>
 
 <script>
-export default {
-  data() {
-    return {}
-  },
+import MusicGearService from '@/services/MusicGearService'
 
+export default {
   props: {
     gearArray: {
       type: Array,
       required: true
     }
+  },
+  methods: {
+    deleteGearItemById(gearId) {
+      this.isLoading = true
+      MusicGearService.deleteGearItemById(gearId).then((response) => {
+        if (response.status === 204) {
+          console.log('ITEM DELETED')
+          location.reload()
+        }
+      })
+    }
   }
 }
 </script>
+
 <style>
 body {
   display: flex;
@@ -58,7 +68,6 @@ li {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  /* font-size: 1.1rem; */
 }
 
 .tools {
@@ -68,24 +77,17 @@ li {
   padding: 10px;
   gap: 5px;
   flex-grow: 1;
-  /* opacity: 0.25; */
 }
 
 .itemCard {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* flex-grow: 1; */
-
   border-radius: 6px;
   padding: 5px;
   margin: 10px;
-
-  /* squares up layout */
   width: 22%;
-
   color: rgb(0, 0, 0);
-
   background: rgba(255, 255, 255, 0.116);
   border-radius: 20px;
   backdrop-filter: blur(5px);
@@ -128,8 +130,6 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* width: 100px;
-  height: 100px; */
 }
 
 .image-container {
