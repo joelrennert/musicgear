@@ -123,7 +123,7 @@ li {
   border-radius: 10px;
 }
 
-/* .name, */
+.name, 
 .image,
 .type,
 .description,
