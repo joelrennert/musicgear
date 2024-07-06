@@ -7,7 +7,7 @@
       </div>
       <li class="image">
         <div class="image-container">
-          <img :src="getImageSrc(item.type)" width="100px" height="100px" />
+          <img :src="getImageSrc(item.type)" width="110px" height="110px" />
           <!-- <img src="/src/assets/equaliser-svgrepo-com.svg" width="100px" height="100px" /> -->
         </div>
       </li>
@@ -96,6 +96,7 @@ li {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
+  padding: 5px;
 }
 
 .delete,
@@ -115,7 +116,7 @@ li {
 .itemCard {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
   border-radius: 6px;
   padding: 5px;
   margin: 10px;
@@ -149,7 +150,6 @@ li {
 }
 
 .name,
-.image,
 .type,
 .description,
 .isVintage {
@@ -158,7 +158,7 @@ li {
   align-items: left;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  padding: 5px;
+  /* padding: 5px; */
   font-weight: 400;
 }
 
@@ -166,6 +166,7 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 .image-container {

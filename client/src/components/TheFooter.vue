@@ -2,7 +2,10 @@
   <footer>
     <div class="container1">
       🫠 JOEL RENNERT 2024 》
-      <a href="#">unorb.com</a> 》<a href="#">github</a> 》<a href="#">linkedin</a>
+      <a href="#">unorb.com</a> 》<a href="https://github.com/joelrennert" target="_blank"
+        >github</a
+      >
+      》<a href="https://www.linkedin.com/in/joelrennert/" target="_blank">linkedin</a>
     </div>
     <div class="container2">thanks for looking at my web app</div>
   </footer>

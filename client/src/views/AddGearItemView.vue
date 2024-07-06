@@ -136,7 +136,7 @@ main {
     position: sticky;
     top: 0;
     z-index: 1;
-    width: 80vw;
+    width: 90vw;
     height: 10%;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;
