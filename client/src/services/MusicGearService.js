@@ -29,6 +29,10 @@ export default {
     return http.post('/musicgear', gearItem);
   },
 
+  updateGearItem(id, updatedItem) {
+    return http.put(`/musicgear/${id}`, updatedItem);
+  },
+
   updateGearItemTypeById(id, type) {
     return http.put(`/musicgear/${id}`, { type });
   },

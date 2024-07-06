@@ -1,5 +1,5 @@
 <template>
-  <article v-for="item in gearArray" v-bind:key="item.gearId" class="itemCard">
+  <article v-for="item in sortedGearArray" :key="item.gearId" class="itemCard">
     <ul>
       <div class="name">
         <h4>{{ item.name }}</h4>
@@ -7,7 +7,8 @@
       </div>
       <li class="image">
         <div class="image-container">
-          <img src="/src/assets/equaliser-svgrepo-com.svg" width="100px" height="100px" />
+          <img :src="getImageSrc(item.type)" width="100px" height="100px" />
+          <!-- <img src="/src/assets/equaliser-svgrepo-com.svg" width="100px" height="100px" /> -->
         </div>
       </li>
       <li>
@@ -20,10 +21,11 @@
         <div class="isVintage">Vintage: {{ item.vintage ? 'Yes' : 'No' }}</div>
       </li>
       <div class="tools">
-        <img src="/src/assets/pencil-svgrepo-com.svg" class="update" height="20" />
+        <img src="/src/assets/pencil-svgrepo-com.svg" v-on:click="updateGearItem(item.gearId)" class="update" height="20" />
         <img
           src="/src/assets/trashcan-svgrepo-com.svg"
-          v-on:click="deleteGearItemById(item.gearId)" class="delete"
+          v-on:click="deleteGearItemById(item.gearId)"
+          class="delete"
           height="20"
         />
       </div>
@@ -42,6 +44,19 @@ export default {
     }
   },
   methods: {
+    getImageSrc(type) {
+      const imageMap = {
+        Guitar: '/src/assets/electric-guitar-svgrepo-com.svg',
+        Synthesizer: '/src/assets/synthesizer.svg',
+        Audio: '/src/assets/equaliser-svgrepo-com.svg',
+        Midi: '/src/assets/server.svg',
+        Mic: '/src/assets/pencil-svgrepo-com.svg',
+        default: '/src/assets/audio.svg'
+      }
+      const imageSrc = imageMap[type] || imageMap.default
+      // console.log(`Type: ${type}, Image Src: ${imageSrc}`)
+      return imageSrc
+    },
     deleteGearItemById(gearId) {
       this.isLoading = true
       MusicGearService.deleteGearItemById(gearId).then((response) => {
@@ -50,6 +65,15 @@ export default {
           location.reload()
         }
       })
+    },
+    updateGearItem(gearId) {
+      this.$router.push({ name: 'update', params: { gearId } })
+    }
+  },
+  computed: {
+    sortedGearArray() {
+      // Sorting by gearId ascending
+      return this.gearArray.slice().sort((a, b) => a.gearId - b.gearId)
     }
   }
 }
@@ -74,7 +98,8 @@ li {
   list-style: none;
 }
 
-.delete, .update {
+.delete,
+.update {
   cursor: pointer;
 }
 
@@ -123,7 +148,7 @@ li {
   border-radius: 10px;
 }
 
-.name, 
+.name,
 .image,
 .type,
 .description,

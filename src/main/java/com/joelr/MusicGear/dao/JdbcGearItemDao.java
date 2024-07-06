@@ -144,13 +144,13 @@ public class JdbcGearItemDao implements GearItemDao {
         return createdGearItem;
     }
 
-    // Update gear item type
+    // Update gear item
     @Override
-    public GearItem updateGearItemType(GearItem gearItem, String type) {
-        String sql = "UPDATE gear SET type = ? WHERE gear_id = ?";
+    public GearItem updateGearItem(GearItem gearItem) {
+        String sql = "UPDATE gear SET type = ?, description = ? WHERE gear_id = ?";
         try {
-            jdbcTemplate.update(sql, type, gearItem.getGearId());
-        } catch (CannotGetJdbcConnectionException e){
+            jdbcTemplate.update(sql, gearItem.getType(), gearItem.getDescription(), gearItem.getGearId());
+        } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
             throw new DaoException("Data integrity violation", e);
@@ -158,19 +158,33 @@ public class JdbcGearItemDao implements GearItemDao {
         return gearItem;
     }
 
+    // Update gear item type
+//    @Override
+//    public GearItem updateGearItemType(GearItem gearItem, String type) {
+//        String sql = "UPDATE gear SET type = ? WHERE gear_id = ?";
+//        try {
+//            jdbcTemplate.update(sql, type, gearItem.getGearId());
+//        } catch (CannotGetJdbcConnectionException e){
+//            throw new DaoException("Unable to connect to server or database", e);
+//        } catch (DataIntegrityViolationException e) {
+//            throw new DaoException("Data integrity violation", e);
+//        }
+//        return gearItem;
+//    }
+
     // Update gear item description
-    @Override
-    public GearItem updateGearItemDescription(GearItem gearItem, String description) {
-        String sql = "UPDATE gear SET description = ? WHERE gear_id = ?";
-        try {
-            jdbcTemplate.update(sql, description, gearItem.getGearId());
-        } catch (CannotGetJdbcConnectionException e){
-            throw new DaoException("Unable to connect to server or database", e);
-        } catch (DataIntegrityViolationException e) {
-            throw new DaoException("Data integrity violation", e);
-        }
-        return gearItem;
-    }
+//    @Override
+//    public GearItem updateGearItemDescription(GearItem gearItem, String description) {
+//        String sql = "UPDATE gear SET description = ? WHERE gear_id = ?";
+//        try {
+//            jdbcTemplate.update(sql, description, gearItem.getGearId());
+//        } catch (CannotGetJdbcConnectionException e){
+//            throw new DaoException("Unable to connect to server or database", e);
+//        } catch (DataIntegrityViolationException e) {
+//            throw new DaoException("Data integrity violation", e);
+//        }
+//        return gearItem;
+//    }
 
     // Remove gear item
     @Override

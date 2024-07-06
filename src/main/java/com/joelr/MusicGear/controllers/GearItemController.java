@@ -51,18 +51,27 @@ public class GearItemController {
         }
     }
 
-    // Update gear item's type or description
     @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-    public GearItem updateGearItemNameOrType(@RequestBody GearItem gearItem,
-                                             @RequestParam(defaultValue = "") String type,
-                                             @RequestParam(defaultValue = "") String description,
-                                             @PathVariable int id) {
+    public GearItem updateGearItem(@PathVariable int id, @RequestBody GearItem gearItem) {
         try {
-            return gearItemService.updateGearItemTypeOrDescription(gearItem, gearItem.getType(), gearItem.getDescription(), id);
-        } catch (DaoException e){
+            return gearItemService.updateGearItem(id, gearItem);
+        } catch (DaoException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Gear Item not found");
         }
     }
+
+    // Update gear item's type or description
+//    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
+//    public GearItem updateGearItemNameOrType(@RequestBody GearItem gearItem,
+//                                             @RequestParam(defaultValue = "") String type,
+//                                             @RequestParam(defaultValue = "") String description,
+//                                             @PathVariable int id) {
+//        try {
+//            return gearItemService.updateGearItemTypeOrDescription(gearItem, gearItem.getType(), gearItem.getDescription(), id);
+//        } catch (DaoException e){
+//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Gear Item not found");
+//        }
+//    }
 
     // Remove gear item
     @ResponseStatus(HttpStatus.NO_CONTENT)

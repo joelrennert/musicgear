@@ -6,6 +6,8 @@
       v-model="query"
       placeholder="Type to search..."
       @input="onInput"
+      id="searchField"
+      name="searchField"
     />
     <button type="submit" class="searchbutton">Search</button>
   </form>
@@ -34,6 +36,7 @@ export default {
   align-items: center;
   justify-content: center;
   gap: 5px;
+  padding-right: 10px;
 }
 
 .search {

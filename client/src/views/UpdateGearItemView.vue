@@ -1,9 +1,10 @@
 <script setup>
 import HelloWorld from '../components/HelloWorld.vue'
 import SearchBox from '../components/SearchBox.vue'
-import GearCards from '../components/GearCards.vue'
 import NavItems from '../components/NavItems.vue'
 import MusicGearService from '../services/MusicGearService'
+import UpdateItemCard from '../components/UpdateItemCard.vue'
+
 </script>
 
 <template>
@@ -11,7 +12,6 @@ import MusicGearService from '../services/MusicGearService'
     <header>
       <div class="wrapper">
         <HelloWorld msg="music gear" />
-
         <div class="search">
           <NavItems />
           <div class="h4title">
@@ -22,61 +22,51 @@ import MusicGearService from '../services/MusicGearService'
       </div>
     </header>
 
-    <div class="cardscontainer">
-      <GearCards :gearArray="filteredGearArray" />
+    <div class="container">
+      <UpdateItemCard v-if="item"
+      :item="item"
+      @update-gear-item="updateGearItem" />
+      <div v-else>Loading...</div> <!-- Show loading until item is fetched -->
     </div>
   </main>
 </template>
 
 <script>
+
+
 export default {
   components: {
     HelloWorld,
     SearchBox,
-    GearCards
+    UpdateItemCard
   },
+  props: ['gearId'],
   data() {
     return {
-      gearArray: [],
-      filteredGearArray: [],
-      filter: '',
-      isLoading: true
-    }
-  },
-  methods: {
-    getGearItems() {
-      this.isLoading = true
-      MusicGearService.list()
-        .then((response) => {
-          this.gearArray = response.data
-          this.filteredGearArray = response.data
-          this.isLoading = false
-          // console.log(this.gearArray)
-        })
-        .catch((error) => {
-          this.handleError(error)
-        })
-    },
-    handleError(error) {
-      this.isLoading = false
-      console.log(error)
-    },
-    filterGearItems(query) {
-      this.filter = query.toLowerCase()
-      if (this.filter) {
-        this.filteredGearArray = this.gearArray.filter(
-          (item) =>
-            item.name.toLowerCase().includes(this.filter) ||
-            item.type.toLowerCase().includes(this.filter) ||
-            item.description.toLowerCase().includes(this.filter)
-        )
-      } else {
-        this.filteredGearArray = this.gearArray
-      }
+      item: null // Initialize item as null
     }
   },
   created() {
-    this.getGearItems()
+    console.log('Fetching gear item with ID:', this.gearId)
+    MusicGearService.getGearItemById(this.gearId).then((response) => {
+      console.log('Received item:', response.data)
+      this.item = response.data
+    }).catch(error => {
+      console.error('Error fetching gear item:', error)
+    })
+  },
+  methods: {
+    updateGearItem(updatedItem) {
+      console.log('Updating gear item with ID:', this.gearId)
+      MusicGearService.updateGearItem(this.gearId, updatedItem)
+        .then(() => {
+          // Refresh the gear items on the main page
+          this.$router.push({ name: 'home' })
+        })
+        .catch(error => {
+          console.error('Error updating gear item:', error)
+        })
+    }
   }
 }
 </script>
@@ -100,7 +90,7 @@ export default {
   width: 80%;
   /* padding: 5px; */
 }
-.cardscontainer {
+.container {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -130,7 +120,7 @@ main {
     position: sticky;
     top: 0;
     z-index: 1;
-    width: 90vw;
+    width: 80vw;
     height: 10%;
     border-bottom-right-radius: 20px;
     border-bottom-left-radius: 20px;

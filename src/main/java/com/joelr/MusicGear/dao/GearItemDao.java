@@ -24,11 +24,14 @@ public interface GearItemDao {
     // Add a gear item
     GearItem addGearItem(GearItem gearItem);
 
+    // Update a gear item
+    GearItem updateGearItem(GearItem updateGearItem);
+
     // Update a gear item's type
-    GearItem updateGearItemType(GearItem gearItem, String type);
+//    GearItem updateGearItemType(GearItem gearItem, String type);
 
     // Update a gear item's description
-    GearItem updateGearItemDescription(GearItem gearItem, String description);
+//    GearItem updateGearItemDescription(GearItem gearItem, String description);
 
     // Delete a gear item
     void removeGearItem(int id);

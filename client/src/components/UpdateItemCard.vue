@@ -1,73 +1,51 @@
 <template>
   <div class="itemCard">
-    <h1 class="name">ADD GEAR ITEM</h1>
+    <h1 class="name">UPDATE GEAR ITEM</h1>
     <div class="aboutcontent">
-      <h3>Add A New Gear Item</h3>
+      <h3>Update Gear Item</h3>
 
-      <form @submit.prevent="submitForm" class="addContainer">
+      <form @submit.prevent="updateGearItem" :key="localItem.id" class="addContainer">
         <div>
-          <label for="nameField">Name:</label>
-          <input type="text" v-model="gearItem.name" id="nameField" name="nameField" required />
-        </div>
-        <div>
-          <label for="typeField">Type:</label>
-          <input type="text" v-model="gearItem.type" id="typeField" name="typeField" required />
-        </div>
-        <div>
-          <label for="descriptionField">Description:</label>
-          <textarea v-model="gearItem.description" id="descriptionField" name="descriptionField" required></textarea>
-        </div>
-        <div>
-          <label for="isVintageField">Is Vintage:</label>
-          <input type="checkbox" v-model="gearItem.isVintage" id="isVintageField" name="isVintageField" />
-        </div>
-        <button type="submit" class="submitButton">Add Gear Item</button>
+  <label for="nameField">Name:</label>
+  <input type="text" v-model="localItem.name" id="nameField" name="nameField" required />
+</div>
+<div>
+  <label for="typeField">Type:</label>
+  <input type="text" v-model="localItem.type" id="typeField" name="typeField" required />
+</div>
+<div>
+  <label for="descriptionField">Description:</label>
+  <textarea v-model="localItem.description" id="descriptionField" name="descriptionField" required></textarea>
+</div>
+<div>
+  <label for="vintageField">Vintage:</label>
+  <input type="checkbox" v-model="localItem.vintage" id="vintageField" name="vintageField" />
+</div>
+<button type="submit">Update</button>
       </form>
     </div>
   </div>
 </template>
 <script>
-import MusicGearService from '@/services/MusicGearService'
 
 export default {
+  props: {
+    item: {
+      type: Object,
+      required: true,
+      default: () => ({}) // Provide a default value
+    }
+  },
   data() {
     return {
-      gearItem: {
-        name: '',
-        type: '',
-        description: '',
-        isVintage: false
-      },
-      isLoading: false
+      localItem: { ...this.item } // Create a local copy of the item prop
     }
   },
   methods: {
-    submitForm() {
-      this.isLoading = true
-      MusicGearService.addNewGearItem(this.gearItem)
-        .then((response) => {
-          if (response.status === 201) {
-            console.log('Gear item added successfully')
-            this.$emit('gear-item-added', response.data)
-            this.resetForm()
-          }
-        })
-        .catch((error) => {
-          console.error('Error adding gear item:', error)
-        })
-        .finally(() => {
-          this.isLoading = false
-          this.$router.push("/");
-        })
-    },
-    resetForm() {
-      this.gearItem = {
-        name: '',
-        type: '',
-        description: '',
-        isVintage: false
-      }
-    }
+    updateGearItem() {
+  console.log('Emitting update event with item:', this.localItem);
+  this.$emit('update-gear-item', this.localItem);
+}
   }
 }
 </script>
