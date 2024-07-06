@@ -3,12 +3,10 @@
     <ul>
       <div class="name">
         <h4>{{ item.name }}</h4>
-        <!-- <h5>{{ item.gearId }}</h5> -->
       </div>
       <li class="image">
         <div class="image-container">
           <img :src="getImageSrc(item.type)" width="110px" height="110px" />
-          <!-- <img src="/src/assets/equaliser-svgrepo-com.svg" width="100px" height="100px" /> -->
         </div>
       </li>
       <li>
@@ -21,7 +19,12 @@
         <div class="isVintage">Vintage: {{ item.vintage ? 'Yes' : 'No' }}</div>
       </li>
       <div class="tools">
-        <img src="/src/assets/pencil-svgrepo-com.svg" v-on:click="updateGearItem(item.gearId)" class="update" height="20" />
+        <img
+          src="/src/assets/pencil-svgrepo-com.svg"
+          v-on:click="updateGearItem(item.gearId)"
+          class="update"
+          height="20"
+        />
         <img
           src="/src/assets/trashcan-svgrepo-com.svg"
           v-on:click="deleteGearItemById(item.gearId)"
@@ -54,7 +57,6 @@ export default {
         default: '/src/assets/audio.svg'
       }
       const imageSrc = imageMap[type] || imageMap.default
-      // console.log(`Type: ${type}, Image Src: ${imageSrc}`)
       return imageSrc
     },
     deleteGearItemById(gearId) {
@@ -72,7 +74,7 @@ export default {
   },
   computed: {
     sortedGearArray() {
-      // Sorting by gearId ascending
+      // Sort by gearId ascending
       return this.gearArray.slice().sort((a, b) => a.gearId - b.gearId)
     }
   }
@@ -158,7 +160,6 @@ li {
   align-items: left;
   justify-content: space-evenly;
   flex-wrap: wrap;
-  /* padding: 5px; */
   font-weight: 400;
 }
 

@@ -20,6 +20,15 @@ export default {}
   justify-content: right;
   padding-right: 20px;
 }
+
+a {
+  color: black;
+}
+
+a:hover {
+  background-color: white;
+}
+
 footer {
   display: flex;
   align-items: center;
