@@ -118,19 +118,19 @@ li {
   margin: 10px;
   width: 22%;
   color: rgb(0, 0, 0);
-  background: rgba(255, 255, 255, 0.116);
+  background: rgba(255, 255, 255, 0);
   border-radius: 20px;
   backdrop-filter: blur(5px);
   -webkit-backdrop-filter: blur(5px);
   border: 1px solid rgb(255, 255, 255);
   box-shadow: 5px 5px 6px 2px rgba(0, 0, 0, 0.2);
-  background: rgb(206, 245, 243);
+  /* background: rgb(206, 245, 243);
   background: linear-gradient(
     90deg,
     rgba(206, 245, 243, 0.249) 0%,
     rgba(241, 251, 229, 0.253) 53%,
     rgba(206, 245, 243, 0.259) 100%
-  );
+  ); */
 }
 
 .name {
