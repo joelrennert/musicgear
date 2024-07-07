@@ -147,9 +147,9 @@ public class JdbcGearItemDao implements GearItemDao {
     // Update gear item
     @Override
     public GearItem updateGearItem(GearItem gearItem) {
-        String sql = "UPDATE gear SET type = ?, description = ? WHERE gear_id = ?";
+        String sql = "UPDATE gear SET gear_id = ?, name = ?, type = ?, description = ?, is_vintage = ? WHERE gear_id = ?";
         try {
-            jdbcTemplate.update(sql, gearItem.getType(), gearItem.getDescription(), gearItem.getGearId());
+            jdbcTemplate.update(sql, gearItem.getGearId(), gearItem.getName(), gearItem.getType(), gearItem.getDescription(), gearItem.getVintage(), gearItem.getGearId());
         } catch (CannotGetJdbcConnectionException e) {
             throw new DaoException("Unable to connect to server or database", e);
         } catch (DataIntegrityViolationException e) {
