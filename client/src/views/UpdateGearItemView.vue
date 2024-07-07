@@ -1,10 +1,9 @@
 <script setup>
 import HelloWorld from '../components/HelloWorld.vue'
-import SearchBox from '../components/SearchBox.vue'
+// import SearchBox from '../components/SearchBox.vue'
 import NavItems from '../components/NavItems.vue'
 import MusicGearService from '../services/MusicGearService'
 import UpdateItemCard from '../components/UpdateItemCard.vue'
-
 </script>
 
 <template>
@@ -17,27 +16,34 @@ import UpdateItemCard from '../components/UpdateItemCard.vue'
           <div class="h4title">
             <h4>MUSIC GEAR INFORMATION CENTER</h4>
           </div>
-          <SearchBox @search="filterGearItems" />
+          <div class="blank"></div>
+          <!-- <div class="sortContainer">
+            <label for="sort"></label>
+            <select v-model="sortKey" id="sort">
+              <option value="gearId">ID</option>
+              <option value="name">Name</option>
+              <option value="type">Type</option>
+              <option value="vintage">Vintage</option>
+            </select>
+          </div>
+          <SearchBox @search="filterGearItems" /> -->
         </div>
       </div>
     </header>
 
     <div class="container">
-      <UpdateItemCard v-if="item"
-      :item="item"
-      @update-gear-item="updateGearItem" />
-      <div v-else>Loading...</div> <!-- Show loading until item is fetched -->
+      <UpdateItemCard v-if="item" :item="item" @update-gear-item="updateGearItem" />
+      <div v-else>Loading...</div>
+      <!-- Show loading until item is fetched -->
     </div>
   </main>
 </template>
 
 <script>
-
-
 export default {
   components: {
     HelloWorld,
-    SearchBox,
+    // SearchBox,
     UpdateItemCard
   },
   props: ['gearId'],
@@ -48,12 +54,14 @@ export default {
   },
   created() {
     console.log('Fetching gear item with ID:', this.gearId)
-    MusicGearService.getGearItemById(this.gearId).then((response) => {
-      console.log('Received item:', response.data)
-      this.item = response.data
-    }).catch(error => {
-      console.error('Error fetching gear item:', error)
-    })
+    MusicGearService.getGearItemById(this.gearId)
+      .then((response) => {
+        console.log('Received item:', response.data)
+        this.item = response.data
+      })
+      .catch((error) => {
+        console.error('Error fetching gear item:', error)
+      })
   },
   methods: {
     updateGearItem(updatedItem) {
@@ -63,7 +71,7 @@ export default {
           // Refresh the gear items on the main page
           this.$router.push({ name: 'home' })
         })
-        .catch(error => {
+        .catch((error) => {
           console.error('Error updating gear item:', error)
         })
     }
@@ -72,6 +80,10 @@ export default {
 </script>
 
 <style scoped>
+.blank {
+  display: flex;
+  width: 30%;
+}
 .h4title {
   display: flex;
   font-family: 'Jura';

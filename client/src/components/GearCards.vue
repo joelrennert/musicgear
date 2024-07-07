@@ -1,5 +1,5 @@
 <template>
-  <article v-for="item in sortedGearArray" :key="item.gearId" class="itemCard">
+  <article v-for="item in gearArray" :key="item.gearId" class="itemCard">
     <ul>
       <div class="name">
         <h4>{{ item.name }}</h4>
@@ -56,8 +56,7 @@ export default {
         Mic: '/src/assets/pencil-svgrepo-com.svg',
         default: '/src/assets/audio.svg'
       }
-      const imageSrc = imageMap[type] || imageMap.default
-      return imageSrc
+      return imageMap[type] || imageMap.default
     },
     deleteGearItemById(gearId) {
       this.isLoading = true
@@ -71,17 +70,11 @@ export default {
     updateGearItem(gearId) {
       this.$router.push({ name: 'update', params: { gearId } })
     }
-  },
-  computed: {
-    sortedGearArray() {
-      // Sort by gearId ascending
-      return this.gearArray.slice().sort((a, b) => a.gearId - b.gearId)
-    }
   }
 }
 </script>
 
-<style>
+<style scoped>
 body {
   display: flex;
   overflow: auto;
@@ -90,6 +83,7 @@ body {
 h5 {
   font-style: italic;
 }
+
 ul {
   padding: 0px;
 }

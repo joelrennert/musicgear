@@ -4,7 +4,7 @@
       type="search"
       class="searchbox"
       v-model="query"
-      placeholder="Type to search..."
+      placeholder="Search..."
       @input="onInput"
       id="searchField"
       name="searchField"
@@ -53,6 +53,7 @@ export default {
   border-radius: 6px;
   border-width: 0px;
   padding: 3px;
+  width: 100px;
 }
 .searchbutton {
   font-family: 'Jura';

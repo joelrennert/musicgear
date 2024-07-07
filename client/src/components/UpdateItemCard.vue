@@ -100,6 +100,7 @@ textarea {
 
 .itemCard {
   display: flex;
+  flex-wrap: wrap;
   /* flex-direction: column; */
   justify-content: space-evenly;
   align-items: center;

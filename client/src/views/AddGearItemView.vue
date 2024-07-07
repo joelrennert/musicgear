@@ -1,6 +1,6 @@
 <script setup>
 import HelloWorld from '../components/HelloWorld.vue'
-import SearchBox from '../components/SearchBox.vue'
+// import SearchBox from '../components/SearchBox.vue'
 import NavItems from '../components/NavItems.vue'
 import MusicGearService from '../services/MusicGearService'
 import AddItemCard from '../components/AddItemCard.vue'
@@ -17,7 +17,17 @@ import AddItemCard from '../components/AddItemCard.vue'
           <div class="h4title">
             <h4>MUSIC GEAR INFORMATION CENTER</h4>
           </div>
-          <SearchBox @search="filterGearItems" />
+          <div class="blank"></div>
+          <!-- <div class="sortContainer">
+            <label for="sort"></label>
+            <select v-model="sortKey" id="sort">
+              <option value="gearId">ID</option>
+              <option value="name">Name</option>
+              <option value="type">Type</option>
+              <option value="vintage">Vintage</option>
+            </select>
+          </div>
+          <SearchBox @search="filterGearItems" /> -->
         </div>
       </div>
     </header>
@@ -34,7 +44,7 @@ import AddItemCard from '../components/AddItemCard.vue'
 export default {
   components: {
     HelloWorld,
-    SearchBox,
+    // SearchBox,
     AddItemCard
   },
   data() {
@@ -88,6 +98,11 @@ export default {
 </script>
 
 <style scoped>
+
+.blank {
+  display: flex;
+  width: 30%;
+}
 .h4title {
   display: flex;
   font-family: 'Jura';
@@ -97,7 +112,7 @@ export default {
   width: 100%;
   flex-grow: 4;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-around;
 }
 .titleimage {
   display: flex;
@@ -161,7 +176,7 @@ main {
   .navsearchcontainer {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 10%;
     flex-grow: 1;
     align-items: center;
   }
@@ -181,13 +196,16 @@ main {
     align-items: center;
     padding-right: 20px;
   }
+
   .searchbox {
     font-family: 'Jura';
     font-size: 0.8rem;
     border-radius: 6px;
     border-width: 0px;
     padding: 5px;
+    width: 50px;
   }
+
   .searchbutton {
     font-family: 'Jura';
     font-size: 0.8rem;

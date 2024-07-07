@@ -1,9 +1,63 @@
 <script setup>
+import { ref, computed, onMounted } from 'vue'
 import HelloWorld from '../components/HelloWorld.vue'
 import SearchBox from '../components/SearchBox.vue'
 import GearCards from '../components/GearCards.vue'
 import NavItems from '../components/NavItems.vue'
 import MusicGearService from '../services/MusicGearService'
+
+const gearArray = ref([])
+const filteredGearArray = ref([])
+const filter = ref('')
+const sortKey = ref('gearId')
+const isLoading = ref(true)
+
+const getGearItems = async () => {
+  isLoading.value = true
+  try {
+    const response = await MusicGearService.list()
+    gearArray.value = response.data
+    filteredGearArray.value = response.data
+    isLoading.value = false
+  } catch (error) {
+    handleError(error)
+  }
+}
+
+const handleError = (error) => {
+  isLoading.value = false
+  console.error(error)
+}
+
+const filterGearItems = (query) => {
+  filter.value = query.toLowerCase()
+  if (filter.value) {
+    filteredGearArray.value = gearArray.value.filter(
+      (item) =>
+        item.name.toLowerCase().includes(filter.value) ||
+        item.type.toLowerCase().includes(filter.value) ||
+        item.description.toLowerCase().includes(filter.value)
+    )
+  } else {
+    filteredGearArray.value = gearArray.value
+  }
+}
+
+const sortedGearArray = computed(() => {
+  return filteredGearArray.value.slice().sort((a, b) => {
+    if (sortKey.value === 'gearId') {
+      return a.gearId - b.gearId
+    } else if (sortKey.value === 'name') {
+      return a.name.localeCompare(b.name)
+    } else if (sortKey.value === 'type') {
+      return a.type.localeCompare(b.type)
+    } else if (sortKey.value === 'vintage') {
+      return a.vintage === b.vintage ? 0 : a.vintage ? -1 : 1
+    }
+  })
+})
+
+onMounted(getGearItems)
 </script>
 
 <template>
@@ -17,71 +71,41 @@ import MusicGearService from '../services/MusicGearService'
           <div class="h4title">
             <h4>MUSIC GEAR INFORMATION CENTER</h4>
           </div>
-          <SearchBox @search="filterGearItems" />
+          <div class="sortandsearch">
+            <div class="sortContainer">
+              <label for="sort"></label>
+              <select v-model="sortKey" id="sort">
+                <option value="gearId">ID</option>
+                <option value="name">Name</option>
+                <option value="type">Type</option>
+                <option value="vintage">Vintage</option>
+              </select>
+            </div>
+            <SearchBox @search="filterGearItems" />
+          </div>
         </div>
       </div>
     </header>
 
     <div class="cardscontainer">
-      <GearCards :gearArray="filteredGearArray" />
+      <GearCards :gearArray="sortedGearArray" />
     </div>
   </main>
 </template>
 
-<script>
-export default {
-  components: {
-    HelloWorld,
-    SearchBox,
-    GearCards
-  },
-  data() {
-    return {
-      gearArray: [],
-      filteredGearArray: [],
-      filter: '',
-      isLoading: true
-    }
-  },
-  methods: {
-    getGearItems() {
-      this.isLoading = true
-      MusicGearService.list()
-        .then((response) => {
-          this.gearArray = response.data
-          this.filteredGearArray = response.data
-          this.isLoading = false
-          // console.log(this.gearArray)
-        })
-        .catch((error) => {
-          this.handleError(error)
-        })
-    },
-    handleError(error) {
-      this.isLoading = false
-      console.log(error)
-    },
-    filterGearItems(query) {
-      this.filter = query.toLowerCase()
-      if (this.filter) {
-        this.filteredGearArray = this.gearArray.filter(
-          (item) =>
-            item.name.toLowerCase().includes(this.filter) ||
-            item.type.toLowerCase().includes(this.filter) ||
-            item.description.toLowerCase().includes(this.filter)
-        )
-      } else {
-        this.filteredGearArray = this.gearArray
-      }
-    }
-  },
-  created() {
-    this.getGearItems()
-  }
-}
-</script>
-
 <style scoped>
+.sortandsearch {
+  display: flex;
+  width: 30%;
+}
+
+.sortContainer {
+  display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
+  flex-shrink: 1;
+}
+
 .h4title {
   display: flex;
   font-family: 'Jura';
@@ -89,17 +113,12 @@ export default {
   color: rgba(0, 0, 0, 0.638);
   padding: 3px;
   width: 100%;
-  flex-grow: 4;
+  flex-grow: 6;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: center;
+  padding-left: 4%;
 }
-.titleimage {
-  display: flex;
-  justify-content: space-evenly;
-  flex-grow: 1;
-  width: 80%;
-  /* padding: 5px; */
-}
+
 .cardscontainer {
   display: flex;
   flex-direction: row;
@@ -109,16 +128,27 @@ export default {
   margin-bottom: 50px;
   width: 80vw;
 }
+
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
+
 .wrapper {
   display: flex;
   justify-content: center;
   line-height: 1.5;
   flex-grow: 1;
+}
+
+.controls {
+  margin: 10px 0;
+}
+
+select {
+  padding: 5px;
+  font-family: 'Jura';
 }
 
 @media (min-width: 768px) {
@@ -152,16 +182,19 @@ main {
       rgba(203, 223, 222, 0.669) 90%
     );
   }
+
   .navsearchcontainer {
     display: flex;
     justify-content: space-between;
-    width: 100%;
+    width: 10%;
     flex-grow: 1;
     align-items: center;
   }
+
   .logo {
     margin: 0 2rem 0 0;
   }
+
   header .wrapper {
     display: flex;
     flex-direction: column;
@@ -175,13 +208,16 @@ main {
     align-items: center;
     padding-right: 20px;
   }
+
   .searchbox {
     font-family: 'Jura';
     font-size: 0.8rem;
     border-radius: 6px;
     border-width: 0px;
     padding: 5px;
+    width: 50px;
   }
+
   .searchbutton {
     font-family: 'Jura';
     font-size: 0.8rem;

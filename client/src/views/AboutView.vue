@@ -1,6 +1,6 @@
 <script setup>
 import HelloWorld from '../components/HelloWorld.vue'
-import SearchBox from '../components/SearchBox.vue'
+// import SearchBox from '../components/SearchBox.vue'
 import NavItems from '../components/NavItems.vue'
 import MusicGearService from '../services/MusicGearService'
 import AboutCard from '../components/AboutCard.vue'
@@ -16,7 +16,17 @@ import AboutCard from '../components/AboutCard.vue'
           <div class="h4title">
             <h4>MUSIC GEAR INFORMATION CENTER</h4>
           </div>
-          <SearchBox @search="filterGearItems" />
+          <div class="blank"></div>
+          <!-- <div class="sortContainer">
+            <label for="sort"></label>
+            <select v-model="sortKey" id="sort">
+              <option value="gearId">ID</option>
+              <option value="name">Name</option>
+              <option value="type">Type</option>
+              <option value="vintage">Vintage</option>
+            </select>
+          </div>
+          <SearchBox @search="filterGearItems" /> -->
         </div>
       </div>
     </header>
@@ -31,7 +41,7 @@ import AboutCard from '../components/AboutCard.vue'
 export default {
   components: {
     HelloWorld,
-    SearchBox,
+    // SearchBox,
   },
   data() {
     return {
@@ -80,6 +90,19 @@ export default {
 </script>
 
 <style scoped>
+
+.blank {
+  display: flex;
+  width: 30%;
+}
+
+.sortContainer {
+  display: flex;
+  padding-left: 10px;
+  padding-right: 10px;
+  flex-shrink: 1;
+}
+
 .h4title {
   display: flex;
   font-family: 'Jura';

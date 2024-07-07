@@ -75,6 +75,7 @@ export default {}
   justify-content: space-evenly;
   align-items: center;
   /* flex-grow: 1; */
+flex-wrap: wrap;
 
   border-radius: 6px;
   padding: 5px;
