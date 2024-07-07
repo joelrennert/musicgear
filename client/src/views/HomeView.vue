@@ -96,7 +96,7 @@ onMounted(getGearItems)
 <style scoped>
 .sortandsearch {
   display: flex;
-  width: 30%;
+  width: 32%;
 }
 
 .sortContainer {
@@ -116,7 +116,7 @@ onMounted(getGearItems)
   flex-grow: 6;
   align-items: center;
   justify-content: center;
-  padding-left: 4%;
+  padding-left: 3.5%;
 }
 
 .cardscontainer {
@@ -149,6 +149,8 @@ main {
 select {
   padding: 5px;
   font-family: 'Jura';
+  border-radius: 6px;
+  font-size: 0.75rem;
 }
 
 @media (min-width: 768px) {
