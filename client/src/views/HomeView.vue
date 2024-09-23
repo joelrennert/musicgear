@@ -75,7 +75,7 @@ onMounted(getGearItems)
             <div class="sortContainer">
               <label for="sort"></label>
               <select v-model="sortKey" id="sort">
-                <doption value="gearId">ID</doption>
+                <option value="gearId">ID</option>
                 <option value="name">Name</option>
                 <option value="type">Type</option>
                 <option value="vintage">Vintage</option>
