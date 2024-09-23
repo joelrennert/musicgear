@@ -49,7 +49,7 @@ export default {
   methods: {
     getImageSrc(type) {
       const imageMap = {
-        Guitar: '/src/assets/electric-guitar-svgrepo-com.svg',
+        Guitar: '/src/assets/equaliser-svgrepo-com.svg',
         Synthesizer: '/src/assets/synthesizer.svg',
         Audio: '/src/assets/equaliser-svgrepo-com.svg',
         Midi: '/src/assets/server.svg',

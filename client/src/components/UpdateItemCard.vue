@@ -21,7 +21,7 @@
   <label for="vintageField">Vintage:</label>
   <input type="checkbox" v-model="localItem.vintage" id="vintageField" name="vintageField" />
 </div>
-<button type="submit">Update</button>
+<button type="submit" class="submitButton">Update</button>
       </form>
     </div>
   </div>
@@ -88,6 +88,7 @@ textarea {
   padding: 4px;
 }
 
+
 .aboutcontent {
   display: flex;
   flex-direction: column;
@@ -109,7 +110,7 @@ textarea {
   border-radius: 6px;
   padding: 5px;
   margin: 10px;
-  width: 100%;
+  width: 45%;
 
   color: rgb(0, 0, 0);
 

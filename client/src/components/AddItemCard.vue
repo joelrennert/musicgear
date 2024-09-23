@@ -15,13 +15,23 @@
         </div>
         <div>
           <label for="descriptionField">Description:</label>
-          <textarea v-model="gearItem.description" id="descriptionField" name="descriptionField" required></textarea>
+          <textarea
+            v-model="gearItem.description"
+            id="descriptionField"
+            name="descriptionField"
+            required
+          ></textarea>
         </div>
         <div>
           <label for="isVintageField">Is Vintage:</label>
-          <input type="checkbox" v-model="gearItem.isVintage" id="isVintageField" name="isVintageField" />
+          <input
+            type="checkbox"
+            v-model="gearItem.isVintage"
+            id="isVintageField"
+            name="isVintageField"
+          />
         </div>
-        <button type="submit" class="submitButton">Add Gear Item</button>
+        <button type="submit" class="submitButton">Add</button>
       </form>
     </div>
   </div>
@@ -57,7 +67,7 @@ export default {
         })
         .finally(() => {
           this.isLoading = false
-          this.$router.push("/");
+          this.$router.push('/')
         })
     },
     resetForm() {
@@ -131,7 +141,7 @@ textarea {
   border-radius: 6px;
   padding: 5px;
   margin: 10px;
-  width: 100%;
+  width: 45%;
 
   color: rgb(0, 0, 0);
 
