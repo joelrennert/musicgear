@@ -1,5 +1,5 @@
 <template>
-  <div class="itemCard">
+  <div class="itemCard fade-in">
     <h1 class="name">MUSIC GEAR</h1>
     <div class="aboutcontent">
       <!-- <img src="/src/assets/piano-svgrepo-com.svg" width="200" /> -->
@@ -27,6 +27,18 @@
 export default {}
 </script>
 <style scoped>
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn .2s ease-in-out;
+}
 .subtitle {
   font-style: italic;
 }

@@ -1,5 +1,5 @@
 <template>
-  <article v-for="item in gearArray" :key="item.gearId" class="itemCard">
+  <article v-for="item in gearArray" :key="item.gearId" class="itemCard fade-in">
     <ul>
       <div class="name">
         <h4>{{ item.name }}</h4>
@@ -75,6 +75,18 @@ export default {
 </script>
 
 <style scoped>
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease-in-out;
+}
 body {
   display: flex;
   overflow: auto;

@@ -71,11 +71,11 @@ onMounted(getGearItems)
           <div class="h4title">
             <h4>MUSIC GEAR INFORMATION CENTER</h4>
           </div>
-          <div class="sortandsearch">
+          <div class="sortandsearch fade-in">
             <div class="sortContainer">
               <label for="sort"></label>
               <select v-model="sortKey" id="sort">
-                <option value="gearId">ID</option>
+                <doption value="gearId">ID</doption>
                 <option value="name">Name</option>
                 <option value="type">Type</option>
                 <option value="vintage">Vintage</option>
@@ -94,6 +94,18 @@ onMounted(getGearItems)
 </template>
 
 <style scoped>
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.2s ease-in-out;
+}
 .sortandsearch {
   display: flex;
   width: 32%;

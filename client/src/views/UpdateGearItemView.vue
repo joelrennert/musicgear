@@ -31,7 +31,7 @@ import UpdateItemCard from '../components/UpdateItemCard.vue'
       </div>
     </header>
 
-    <div class="container">
+    <div class="container fade-in">
       <UpdateItemCard v-if="item" :item="item" @update-gear-item="updateGearItem" />
       <div v-else>Loading...</div>
       <!-- Show loading until item is fetched -->
@@ -80,6 +80,18 @@ export default {
 </script>
 
 <style scoped>
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn .2s ease-in-out;
+}
 .blank {
   display: flex;
   width: 30%;

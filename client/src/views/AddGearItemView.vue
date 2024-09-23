@@ -8,7 +8,7 @@ import AddItemCard from '../components/AddItemCard.vue'
 </script>
 
 <template>
-  <main>
+  <main >
     <header>
       <div class="wrapper">
         <HelloWorld msg="music gear" />
@@ -32,7 +32,7 @@ import AddItemCard from '../components/AddItemCard.vue'
       </div>
     </header>
 
-    <div class="container">
+    <div class="container fade-in">
       <AddItemCard />
     </div>
   </main>
@@ -98,6 +98,18 @@ export default {
 </script>
 
 <style scoped>
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn .2s ease-in-out;
+}
 
 .blank {
   display: flex;

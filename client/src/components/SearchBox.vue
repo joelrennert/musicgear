@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="onSubmit" class="searchcontainer">
+  <form @submit.prevent="onSubmit" class="searchcontainer fade-in">
     <input
       type="search"
       class="searchbox"
@@ -31,6 +31,18 @@ export default {
 }
 </script>
 <style scoped>
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.fade-in {
+  animation: fadeIn .2s ease-in-out;
+}
 .searchcontainer {
   display: flex;
   align-items: center;
