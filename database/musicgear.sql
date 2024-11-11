@@ -25,6 +25,8 @@ INSERT INTO gear(type, name, description, is_vintage) VALUES
 ('Synthesizer', 'Behringer Neutron', 'Analog Monosynth', FALSE),
 ('Synthesizer', 'Eurorack Modules', 'Lots to list here', FALSE),
 ('Audio', 'Ampex Reel to Reel','1960s amp', TRUE),
+('Audio', 'Orange Crush 20RT','Guitar amp', TRUE),
+('Audio', 'Focusrite Scarlett', '2i2 4th Gen', FALSE),
 ('Audio', 'Technics SA-205', '1970s receiver', TRUE),
 ('Audio', 'Tascam 424 mk1', '1990s 4-track', TRUE),
 ('Audio', 'Yamaha EQ-70', '1990s Graphic EQ', TRUE),

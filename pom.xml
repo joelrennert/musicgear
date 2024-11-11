@@ -16,6 +16,8 @@
 	<properties>
 		<java.version>11</java.version>
 	</properties>
+
+
 	<dependencies>
 
 		<dependency>
@@ -39,6 +41,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
+			<version>42.7.2</version>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -60,5 +63,5 @@
 			</plugin>
 		</plugins>
 	</build>
-
+	<packaging>jar</packaging>
 </project>
