@@ -43,19 +43,6 @@ public class GearItemService {
         return gearItemDao.updateGearItem(updatedGearItem);
     }
 
-    // Update gear item type or description
-//    public GearItem updateGearItemTypeOrDescription(GearItem gearItem, String type, String description, int id){
-//        gearItem.setGearId(id);
-//        GearItem updatedGearItem = null;
-//        if(!type.equals("") || description.equals("")){
-//            updatedGearItem = gearItemDao.updateGearItemType(gearItem, gearItem.getType());
-//        }
-//        if (!description.equals("") || type.equals("")){
-//            updatedGearItem = gearItemDao.updateGearItemDescription(gearItem, gearItem.getDescription());
-//        }
-//        return updatedGearItem;
-//    }
-
     // Remove gear item
     public void removeGearItem(int id) {
             gearItemDao.removeGearItem(id);

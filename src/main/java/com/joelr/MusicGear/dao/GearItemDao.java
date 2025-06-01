@@ -27,12 +27,6 @@ public interface GearItemDao {
     // Update a gear item
     GearItem updateGearItem(GearItem updateGearItem);
 
-    // Update a gear item's type
-//    GearItem updateGearItemType(GearItem gearItem, String type);
-
-    // Update a gear item's description
-//    GearItem updateGearItemDescription(GearItem gearItem, String description);
-
     // Delete a gear item
     void removeGearItem(int id);
 

@@ -31,7 +31,7 @@ public class JdbcGearItemDao implements GearItemDao {
         if (useWildcard) {
             name = "%" + (name == null ? "" : name) + "%";
         }
-        boolean checkType = type != null && type.trim().length() > 0;
+        boolean checkType = type != null && !type.trim().isEmpty();
 
         String sql = GEAR_SELECT + "FROM gear WHERE name ILIKE ? " +
                 (checkType ? " AND type ILIKE ?" : "");
@@ -157,34 +157,6 @@ public class JdbcGearItemDao implements GearItemDao {
         }
         return gearItem;
     }
-
-    // Update gear item type
-//    @Override
-//    public GearItem updateGearItemType(GearItem gearItem, String type) {
-//        String sql = "UPDATE gear SET type = ? WHERE gear_id = ?";
-//        try {
-//            jdbcTemplate.update(sql, type, gearItem.getGearId());
-//        } catch (CannotGetJdbcConnectionException e){
-//            throw new DaoException("Unable to connect to server or database", e);
-//        } catch (DataIntegrityViolationException e) {
-//            throw new DaoException("Data integrity violation", e);
-//        }
-//        return gearItem;
-//    }
-
-    // Update gear item description
-//    @Override
-//    public GearItem updateGearItemDescription(GearItem gearItem, String description) {
-//        String sql = "UPDATE gear SET description = ? WHERE gear_id = ?";
-//        try {
-//            jdbcTemplate.update(sql, description, gearItem.getGearId());
-//        } catch (CannotGetJdbcConnectionException e){
-//            throw new DaoException("Unable to connect to server or database", e);
-//        } catch (DataIntegrityViolationException e) {
-//            throw new DaoException("Data integrity violation", e);
-//        }
-//        return gearItem;
-//    }
 
     // Remove gear item
     @Override
