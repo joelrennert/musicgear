@@ -1,9 +1,9 @@
 # musicgear
 Basic Personal Music Gear Information Center
 
-My attempt to create a RESTful Java application that connects to a PostgreSQL database containing
-information about currently owned music gear
+A simple RESTful web app to manage personal music gear.
 
-Implementing CRUD functionality
+Built with Java, Spring Boot, PostgreSQL, and Vue.js.
+Supports full CRUD operations for tracking owned gear.
 
-Java, Spring Boot, PostgreSQL, Vue.js
+![Screenshot](screenshot.png)
