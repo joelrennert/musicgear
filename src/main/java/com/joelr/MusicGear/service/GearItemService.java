@@ -12,6 +12,7 @@ public class GearItemService {
 
     private final GearItemDao gearItemDao;
 
+
     @Autowired
     public GearItemService(GearItemDao gearItemDao) {
         this.gearItemDao = gearItemDao;
