@@ -1,4 +1,4 @@
-package com.joelr.MusicGear.exception;
+package com.joelr.musicgear.exception;
 
 public class DaoException extends RuntimeException {
 

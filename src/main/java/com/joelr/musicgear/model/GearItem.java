@@ -1,4 +1,4 @@
-package com.joelr.MusicGear.model;
+package com.joelr.musicgear.model;
 
 public class GearItem {
 

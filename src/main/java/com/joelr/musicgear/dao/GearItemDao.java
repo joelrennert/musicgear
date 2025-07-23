@@ -1,6 +1,6 @@
-package com.joelr.MusicGear.dao;
+package com.joelr.musicgear.dao;
 
-import com.joelr.MusicGear.model.GearItem;
+import com.joelr.musicgear.model.GearItem;
 
 import java.util.List;
 

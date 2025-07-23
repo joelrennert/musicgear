@@ -1,4 +1,4 @@
-package com.joelr.MusicGear;
+package com.joelr.musicgear;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

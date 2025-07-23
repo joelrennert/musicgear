@@ -1,4 +1,4 @@
-package com.joelr.MusicGear;
+package com.joelr.musicgear;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

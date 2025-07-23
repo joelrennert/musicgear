@@ -1,6 +1,6 @@
-package com.joelr.MusicGear.dao;
-import com.joelr.MusicGear.exception.DaoException;
-import com.joelr.MusicGear.model.GearItem;
+package com.joelr.musicgear.dao;
+import com.joelr.musicgear.exception.DaoException;
+import com.joelr.musicgear.model.GearItem;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;

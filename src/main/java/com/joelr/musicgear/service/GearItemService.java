@@ -1,7 +1,7 @@
-package com.joelr.MusicGear.service;
+package com.joelr.musicgear.service;
 
-import com.joelr.MusicGear.dao.GearItemDao;
-import com.joelr.MusicGear.model.GearItem;
+import com.joelr.musicgear.dao.GearItemDao;
+import com.joelr.musicgear.model.GearItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,10 +1,10 @@
-package com.joelr.MusicGear.controllers;
+package com.joelr.musicgear.controllers;
 
-import com.joelr.MusicGear.dao.JdbcGearItemDao;
-import com.joelr.MusicGear.exception.DaoException;
-import com.joelr.MusicGear.model.GearItem;
+import com.joelr.musicgear.dao.JdbcGearItemDao;
+import com.joelr.musicgear.exception.DaoException;
+import com.joelr.musicgear.model.GearItem;
 
-import com.joelr.MusicGear.service.GearItemService;
+import com.joelr.musicgear.service.GearItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
