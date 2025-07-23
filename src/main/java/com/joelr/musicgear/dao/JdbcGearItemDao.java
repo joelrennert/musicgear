@@ -1,7 +1,7 @@
 package com.joelr.musicgear.dao;
+
 import com.joelr.musicgear.exception.DaoException;
 import com.joelr.musicgear.model.GearItem;
-
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.jdbc.CannotGetJdbcConnectionException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,163 +15,136 @@ import java.util.List;
 @Component
 public class JdbcGearItemDao implements GearItemDao {
 
-    private final String GEAR_SELECT = "SELECT gear_id, type, name, description, is_vintage ";
+    private static final String GEAR_SELECT = "SELECT gear_id, type, name, description, is_vintage ";
     private final JdbcTemplate jdbcTemplate;
 
     public JdbcGearItemDao(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    // Get a list of gear items by name or type
     @Override
     public List<GearItem> getGearItemsByNameAndType(String name, String type) {
-        List<GearItem> products = new ArrayList<>();
-        boolean useWildcard = true;
-
-        if (useWildcard) {
-            name = "%" + (name == null ? "" : name) + "%";
-        }
-        boolean checkType = type != null && !type.trim().isEmpty();
-
-        String sql = GEAR_SELECT + "FROM gear WHERE name ILIKE ? " +
-                (checkType ? " AND type ILIKE ?" : "");
-        try {
-            SqlRowSet results;
-            if (checkType) {
-                results = jdbcTemplate.queryForRowSet(sql, name, type);
-            } else {
-                results = jdbcTemplate.queryForRowSet(sql, name);
-            }
-            while (results.next()) {
-                GearItem gearItem = mapRowToGearItem(results);
-                products.add(gearItem);
-            }
-        } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
-        } catch (DataIntegrityViolationException e) {
-            throw new DaoException("Data integrity violation", e);
-        }
-        return products;
-    }
-
-    // Get a list of all gear items
-    @Override
-    public List<GearItem> getGearItems() {
         List<GearItem> gearItems = new ArrayList<>();
-        String sql = GEAR_SELECT + "FROM gear ";
+        String nameParam = "%" + (name == null ? "" : name.trim()) + "%";
+        boolean hasType = type != null && !type.trim().isEmpty();
+        String sql = GEAR_SELECT + "FROM gear WHERE name ILIKE ?"
+                + (hasType ? " AND type ILIKE ?" : "");
+
         try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            SqlRowSet results = hasType
+                    ? jdbcTemplate.queryForRowSet(sql, nameParam, "%" + type.trim() + "%")
+                    : jdbcTemplate.queryForRowSet(sql, nameParam);
+
             while (results.next()) {
-                GearItem gearItem = mapRowToGearItem(results);
-                gearItems.add(gearItem);
+                gearItems.add(mapRowToGearItem(results));
             }
-        } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
+        } catch (CannotGetJdbcConnectionException | DataIntegrityViolationException e) {
+            throw new DaoException("Database access error", e);
         }
         return gearItems;
     }
 
-    // Get a single gear item by id
+    @Override
+    public List<GearItem> getGearItems() {
+        List<GearItem> gearItems = new ArrayList<>();
+        String sql = GEAR_SELECT + "FROM gear";
+
+        try {
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+            while (results.next()) {
+                gearItems.add(mapRowToGearItem(results));
+            }
+        } catch (CannotGetJdbcConnectionException | DataIntegrityViolationException e) {
+            throw new DaoException("Database access error", e);
+        }
+        return gearItems;
+    }
+
     @Override
     public GearItem getGearItemById(int gearId) {
-        GearItem gearItem = null;
         String sql = GEAR_SELECT + "FROM gear WHERE gear_id = ?";
         try {
             SqlRowSet results = jdbcTemplate.queryForRowSet(sql, gearId);
             if (results.next()) {
-                gearItem = mapRowToGearItem(results);
+                return mapRowToGearItem(results);
             }
-        } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
+            return null;
+        } catch (CannotGetJdbcConnectionException | DataIntegrityViolationException e) {
+            throw new DaoException("Database access error", e);
         }
-        return gearItem;
     }
 
-    // Get a list of gear items by name
     @Override
     public List<GearItem> getGearItemsByName(String name) {
-        List<GearItem> gearItems = new ArrayList<>();
-        String sql = GEAR_SELECT + "FROM gear WHERE name ILIKE ?";
-        try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, name);
-            while (results.next()) {
-                gearItems.add(mapRowToGearItem(results));
-            }
-        } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
-        } catch (DataIntegrityViolationException e) {
-            throw new DaoException("Data integrity violation", e);
-        }
-        return gearItems;
+        return queryGearItemsBySingleParam("name", name);
     }
 
-    // Get a list of gear items by type
     @Override
     public List<GearItem> getGearItemsByType(String type) {
+        return queryGearItemsBySingleParam("type", type);
+    }
+
+    private List<GearItem> queryGearItemsBySingleParam(String column, String value) {
         List<GearItem> gearItems = new ArrayList<>();
-        String sql = GEAR_SELECT + " FROM gear WHERE type ILIKE ?";
+        if (value == null || value.trim().isEmpty()) {
+            return gearItems;
+        }
+        String sql = GEAR_SELECT + "FROM gear WHERE " + column + " ILIKE ?";
+        String param = "%" + value.trim() + "%";
+
         try {
-            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, type);
+            SqlRowSet results = jdbcTemplate.queryForRowSet(sql, param);
             while (results.next()) {
                 gearItems.add(mapRowToGearItem(results));
             }
-        } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
-        } catch (DataIntegrityViolationException e) {
-            throw new DaoException("Data integrity violation", e);
+        } catch (CannotGetJdbcConnectionException | DataIntegrityViolationException e) {
+            throw new DaoException("Database access error", e);
         }
         return gearItems;
     }
 
-    // Add a new gear item
     @Override
     public GearItem addGearItem(GearItem gearItem) {
-        GearItem createdGearItem = null;
-        String sql = "INSERT INTO gear (type, name, description, is_vintage) " +
-                "VALUES (?, ?, ?, ?) RETURNING gear_id";
+        String sql = "INSERT INTO gear (type, name, description, is_vintage) VALUES (?, ?, ?, ?) RETURNING gear_id";
         try {
-            Integer id = jdbcTemplate.queryForObject(sql, int.class,
-                                                gearItem.getType(),
-                                                gearItem.getName(),
-                                                gearItem.getDescription(),
-                                                gearItem.getVintage());
-            createdGearItem = getGearItemById(id);
-        } catch (CannotGetJdbcConnectionException e){
-            throw new DaoException("Unable to connect to server or database", e);
-        } catch (DataIntegrityViolationException e){
-            throw new DaoException("Data integrity violation", e);
+            Integer id = jdbcTemplate.queryForObject(sql, Integer.class,
+                    gearItem.getType(),
+                    gearItem.getName(),
+                    gearItem.getDescription(),
+                    gearItem.getVintage());
+            return getGearItemById(id);
+        } catch (CannotGetJdbcConnectionException | DataIntegrityViolationException e) {
+            throw new DaoException("Database access error", e);
         }
-        return createdGearItem;
     }
 
-    // Update gear item
     @Override
     public GearItem updateGearItem(GearItem gearItem) {
-        String sql = "UPDATE gear SET gear_id = ?, name = ?, type = ?, description = ?, is_vintage = ? WHERE gear_id = ?";
+        String sql = "UPDATE gear SET name = ?, type = ?, description = ?, is_vintage = ? WHERE gear_id = ?";
         try {
-            jdbcTemplate.update(sql, gearItem.getGearId(), gearItem.getName(), gearItem.getType(), gearItem.getDescription(), gearItem.getVintage(), gearItem.getGearId());
-        } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
-        } catch (DataIntegrityViolationException e) {
-            throw new DaoException("Data integrity violation", e);
+            jdbcTemplate.update(sql,
+                    gearItem.getName(),
+                    gearItem.getType(),
+                    gearItem.getDescription(),
+                    gearItem.getVintage(),
+                    gearItem.getGearId());
+            return gearItem;
+        } catch (CannotGetJdbcConnectionException | DataIntegrityViolationException e) {
+            throw new DaoException("Database access error", e);
         }
-        return gearItem;
     }
 
-    // Remove gear item
     @Override
     public void removeGearItem(int id) {
         String sql = "DELETE FROM gear WHERE gear_id = ?";
         try {
             jdbcTemplate.update(sql, id);
-        } catch (CannotGetJdbcConnectionException e) {
-            throw new DaoException("Unable to connect to server or database", e);
-        } catch (DataIntegrityViolationException e) {
-            throw new DaoException("Data integrity violation", e);
+        } catch (CannotGetJdbcConnectionException | DataIntegrityViolationException e) {
+            throw new DaoException("Database access error", e);
         }
     }
 
-    private GearItem mapRowToGearItem(SqlRowSet results){
+    private GearItem mapRowToGearItem(SqlRowSet results) {
         GearItem gearItem = new GearItem();
         gearItem.setGearId(results.getInt("gear_id"));
         gearItem.setType(results.getString("type"));
@@ -180,5 +153,4 @@ public class JdbcGearItemDao implements GearItemDao {
         gearItem.setVintage(results.getBoolean("is_vintage"));
         return gearItem;
     }
-
 }

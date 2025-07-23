@@ -2,15 +2,15 @@ package com.joelr.musicgear.exception;
 
 public class DaoException extends RuntimeException {
 
-    public DaoException(){
+    public DaoException() {
         super();
     }
 
-    public DaoException(String message){
+    public DaoException(String message) {
         super(message);
     }
 
-    public DaoException(String message, Exception cause){
+    public DaoException(String message, Throwable cause) {
         super(message, cause);
     }
 

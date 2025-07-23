@@ -12,13 +12,11 @@ public class GearItemService {
 
     private final GearItemDao gearItemDao;
 
-
     @Autowired
     public GearItemService(GearItemDao gearItemDao) {
         this.gearItemDao = gearItemDao;
     }
 
-    // Get gear items by name or type
     public List<GearItem> getGearItemsByNameOrType(String name, String type) {
         boolean hasName = name != null && !name.isBlank();
         boolean hasType = type != null && !type.isBlank();
@@ -30,7 +28,6 @@ public class GearItemService {
         } else if (hasName) {
             return gearItemDao.getGearItemsByName("%" + name + "%");
         }
-
         return gearItemDao.getGearItems();
     }
 

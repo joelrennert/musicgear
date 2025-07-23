@@ -1,11 +1,8 @@
 package com.joelr.musicgear.controllers;
 
-import com.joelr.musicgear.dao.JdbcGearItemDao;
 import com.joelr.musicgear.exception.DaoException;
 import com.joelr.musicgear.model.GearItem;
-
 import com.joelr.musicgear.service.GearItemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,62 +10,62 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 import java.util.List;
 
-
 @RestController
 @CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping("/musicgear")
 public class GearItemController {
 
-    @Autowired
-    private GearItemService gearItemService;
-    @Autowired
-    private JdbcGearItemDao gearItemDao;
+    private final GearItemService gearItemService;
 
-    public GearItemController(JdbcGearItemDao jdbcGearItemDao){
-        this.gearItemDao = jdbcGearItemDao;
+    public GearItemController(GearItemService gearItemService) {
+        this.gearItemService = gearItemService;
     }
 
-    // Get gear items by name or type
-    @RequestMapping(path = "", method = RequestMethod.GET)
-    public List<GearItem> list(@RequestParam(defaultValue = "") String name, @RequestParam(defaultValue = "") String type){
+    @GetMapping("")
+    public List<GearItem> list(@RequestParam(defaultValue = "") String name,
+                               @RequestParam(defaultValue = "") String type) {
         return gearItemService.getGearItemsByNameOrType(name, type);
     }
 
-    // Get single gear item by id
-    @RequestMapping(path = "/{id}", method = RequestMethod.GET)
-    public GearItem get(@PathVariable int id){
-        return gearItemService.getGearItemById(id);
+    @GetMapping("/{id}")
+    public GearItem get(@PathVariable int id) {
+        GearItem gearItem = gearItemService.getGearItemById(id);
+        if (gearItem == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Gear item not found");
+        }
+        return gearItem;
     }
 
-    // Add gear item
-    @ResponseStatus(value = HttpStatus.CREATED)
-    @RequestMapping(path = "", method = RequestMethod.POST)
+    @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
     public GearItem add(@Valid @RequestBody GearItem gearItem) {
         try {
             return gearItemService.addGearItem(gearItem);
         } catch (DaoException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Gear Item not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error adding gear item", e);
         }
     }
 
-    @RequestMapping(path = "/{id}", method = RequestMethod.PUT)
-    public GearItem updateGearItem(@PathVariable int id, @RequestBody GearItem gearItem) {
+    @PutMapping("/{id}")
+    public GearItem update(@PathVariable int id, @Valid @RequestBody GearItem gearItem) {
         try {
-            return gearItemService.updateGearItem(id, gearItem);
+            GearItem updated = gearItemService.updateGearItem(id, gearItem);
+            if (updated == null) {
+                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Gear item not found");
+            }
+            return updated;
         } catch (DaoException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Gear Item not found");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error updating gear item", e);
         }
     }
 
-    // Remove gear item
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    @RequestMapping(path = "/{id}", method = RequestMethod.DELETE)
-    public void removeGearItem(@PathVariable int id){
+    public void remove(@PathVariable int id) {
         try {
             gearItemService.removeGearItem(id);
-        } catch (DaoException e){
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (DaoException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Error deleting gear item", e);
         }
     }
-
 }

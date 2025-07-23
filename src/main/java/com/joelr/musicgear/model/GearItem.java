@@ -6,9 +6,17 @@ public class GearItem {
     private String type;
     private String name;
     private String description;
-    private Boolean isVintage;
+    private Boolean vintage;
 
-    public GearItem(){
+    public GearItem() {
+    }
+
+    public GearItem(int gearId, String type, String name, String description, Boolean vintage) {
+        this.gearId = gearId;
+        this.type = type;
+        this.name = name;
+        this.description = description;
+        this.vintage = vintage;
     }
 
     public int getGearId() {
@@ -44,22 +52,18 @@ public class GearItem {
     }
 
     public Boolean getVintage() {
-        return isVintage;
+        return vintage;
     }
 
     public void setVintage(Boolean vintage) {
-        isVintage = vintage;
+        this.vintage = vintage;
     }
 
     @Override
-    public String toString(){
-        return "Product{ " +
-                "  id = " + gearId +
-                ", type = " + type +
-                ", name = " + name +
-                ", description = " + description +
-                ", isVintage = " + isVintage  +" }";
+    public String toString() {
+        return String.format(
+                "GearItem{gearId=%d, type='%s', name='%s', description='%s', vintage=%b}",
+                gearId, type, name, description, vintage
+        );
     }
-
-
 }
